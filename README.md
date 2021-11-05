@@ -1,2 +1,2 @@
-# vault-app
+# app
 The app (in flutter) for interacting with your vault
