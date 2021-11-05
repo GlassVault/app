@@ -6,7 +6,7 @@
     "glass-vault": {
       "hosting": {
         "app": [
-          "glass-vault-app"
+          "blck-vault-app"
         ]
       }
     }
