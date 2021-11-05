@@ -10,6 +10,12 @@ class PasswordsScreen extends StatefulWidget {
 class _PasswordsScreenState extends State<PasswordsScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      primary: true,
+      appBar: AppBar(
+        title: Text("Passwords"),
+      ),
+      body: Center(child: Text("Passwords go here")),
+    );
   }
 }

@@ -10,6 +10,12 @@ class WalletsScreen extends StatefulWidget {
 class _WalletsScreenState extends State<WalletsScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      primary: true,
+      appBar: AppBar(
+        title: Text("Accounts"),
+      ),
+      body: Center(child: Text("Wallets go here")),
+    );
   }
 }

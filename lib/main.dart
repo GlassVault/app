@@ -56,8 +56,13 @@ class _BlackVaultState extends State<BlackVault> {
         child: GetMaterialApp(
           title: "Black Vault",
           darkTheme: ThemeData(),
-          theme: ThemeData(),
-          themeMode: ThemeMode.system,
+          theme: ThemeData(
+              appBarTheme: const AppBarTheme(
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  titleTextStyle:
+                      TextStyle(color: Colors.black38, fontSize: 42))),
+          themeMode: ThemeMode.light,
           home: HomeScreen(),
         ),
       );

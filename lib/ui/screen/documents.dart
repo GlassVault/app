@@ -10,6 +10,12 @@ class DocumentsScreen extends StatefulWidget {
 class _DocumentsScreenState extends State<DocumentsScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      primary: true,
+      appBar: AppBar(
+        title: Text("Documents"),
+      ),
+      body: Center(child: Text("Documents go here")),
+    );
   }
 }

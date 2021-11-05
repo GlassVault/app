@@ -31,14 +31,19 @@ class _HomeScreenState extends State<HomeScreen> {
         bubbleCurve: Curves.easeOutCirc,
         scaleFactor: 0.0001,
         scaleCurve: Curves.easeInOutSine,
-        borderRadius: Radius.circular(18),
         iconSize: 38,
         backgroundColor: Colors.transparent,
         elevation: 0,
         items: [
-          CustomNavigationBarItem(icon: Icon(Icons.document)),
-          CustomNavigationBarItem(icon: Icon(Icons.ten_k_rounded)),
-          CustomNavigationBarItem(icon: Icon(Icons.twenty_mp_outlined)),
+          CustomNavigationBarItem(
+              icon: Icon(Icons.folder_outlined),
+              selectedIcon: Icon(Icons.folder_rounded)),
+          CustomNavigationBarItem(
+              icon: Icon(Icons.shield_outlined),
+              selectedIcon: Icon(Icons.shield_rounded)),
+          CustomNavigationBarItem(
+              icon: Icon(Icons.account_balance_wallet_outlined),
+              selectedIcon: Icon(Icons.account_balance_wallet_rounded)),
         ],
       ),
       body: Center(
