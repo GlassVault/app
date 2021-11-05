@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "glass-vault"
+  },
+  "targets": {
+    "glass-vault": {
+      "hosting": {
+        "app": [
+          "glass-vault-app"
+        ]
+      }
+    }
   }
 }
