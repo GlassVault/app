@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         items: [
-          CustomNavigationBarItem(icon: Icon(Icons.fifteen_mp_rounded)),
+          CustomNavigationBarItem(icon: Icon(Icons.document)),
           CustomNavigationBarItem(icon: Icon(Icons.ten_k_rounded)),
           CustomNavigationBarItem(icon: Icon(Icons.twenty_mp_outlined)),
         ],
