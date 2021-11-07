@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:glassvault/main.dart';
@@ -11,10 +12,15 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   late bool dark;
+  late List<String> networks;
+  late String network;
 
   @override
   void initState() {
+    networks = Properties.NETWORKS.keys.toList(growable: false);
     dark = context.box().get("dark", defaultValue: false);
+    network =
+        context.box().get("network", defaultValue: Properties.DEFAULT_NETWORK);
     super.initState();
   }
 
@@ -34,7 +40,36 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     dark = f!;
                     context.box().put("dark", f);
                     Get.forceAppUpdate();
-                  }))
+                  })),
+          ExpansionTile(
+            title: Text("Network"),
+            leading: Icon(Icons.signal_cellular_alt_rounded),
+            subtitle: Text(Properties.initializedNetwork == network
+                ? network
+                : Properties.initializedNetwork +
+                    " -> " +
+                    network +
+                    " (App Restart Required)"),
+            children: [
+              ListView.builder(
+                shrinkWrap: true,
+                itemBuilder: (context, pos) => RadioListTile<String>(
+                    value: networks[pos],
+                    groupValue: network,
+                    title: Text(networks[pos]),
+                    onChanged: (f) => setState(() {
+                          network = f!;
+                          context.box().put("network", network);
+                          ScaffoldMessenger.of(context).clearSnackBars();
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(kIsWeb
+                                  ? "You need to refresh/relaunch to switch networks."
+                                  : "You need to relaunch Black Vault to change the network.")));
+                        })),
+                itemCount: Properties.NETWORKS.length,
+              )
+            ],
+          )
         ],
       ),
     );
