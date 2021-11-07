@@ -1,3 +1,5 @@
+// ignore_for_file: no_logic_in_create_state
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,14 +34,18 @@ void main() {
 }
 
 class BlackVault extends StatefulWidget {
+  late final _BlackVaultState state;
   final Box box;
   final Web3Client rpc;
 
-  const BlackVault({Key? key, required this.box, required this.rpc})
+  BlackVault({Key? key, required this.box, required this.rpc})
       : super(key: key);
 
   @override
-  _BlackVaultState createState() => _BlackVaultState();
+  _BlackVaultState createState() {
+    state = _BlackVaultState();
+    return state;
+  }
 }
 
 class _BlackVaultState extends State<BlackVault> {
@@ -54,15 +60,33 @@ class _BlackVaultState extends State<BlackVault> {
           )
         ],
         child: GetMaterialApp(
+          debugShowCheckedModeBanner: false,
           title: "Black Vault",
-          darkTheme: ThemeData(),
-          theme: ThemeData(
+          darkTheme: ThemeData.dark().copyWith(
+              tooltipTheme:
+                  TooltipThemeData(triggerMode: TooltipTriggerMode.manual),
               appBarTheme: const AppBarTheme(
+                  actionsIconTheme: IconThemeData(color: Colors.white60),
+                  centerTitle: true,
+                  iconTheme: IconThemeData(color: Colors.white60),
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  titleTextStyle:
+                      TextStyle(color: Colors.white60, fontSize: 42))),
+          theme: ThemeData(
+              tooltipTheme:
+                  TooltipThemeData(triggerMode: TooltipTriggerMode.manual),
+              appBarTheme: const AppBarTheme(
+                  actionsIconTheme: IconThemeData(color: Colors.black38),
+                  centerTitle: true,
+                  iconTheme: IconThemeData(color: Colors.black38),
                   backgroundColor: Colors.transparent,
                   elevation: 0,
                   titleTextStyle:
                       TextStyle(color: Colors.black38, fontSize: 42))),
-          themeMode: ThemeMode.light,
+          themeMode: widget.box.get("dark", defaultValue: false)
+              ? ThemeMode.dark
+              : ThemeMode.light,
           home: HomeScreen(),
         ),
       );
