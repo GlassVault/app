@@ -1,7 +1,7 @@
+import 'package:black_vault/main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:glassvault/main.dart';
 import 'package:gradient_ui_widgets/gradient_ui_widgets.dart';
 
 class SettingsScreen extends StatefulWidget {

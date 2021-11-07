@@ -1,8 +1,8 @@
+import 'package:black_vault/main.dart';
+import 'package:black_vault/ui/screen/documents.dart';
+import 'package:black_vault/ui/screen/passwords.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:glassvault/main.dart';
-import 'package:glassvault/ui/screen/documents.dart';
-import 'package:glassvault/ui/screen/passwords.dart';
 import 'package:gradient_ui_widgets/gradient_ui_widgets.dart';
 
 typedef Build = Widget? Function(BuildContext context);

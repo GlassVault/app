@@ -1,11 +1,13 @@
 // ignore_for_file: no_logic_in_create_state
 
+import 'package:black_vault/ui/screen/home.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:glassvault/ui/screen/home.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:web3dart/web3dart.dart';
 
@@ -50,7 +52,7 @@ Future<Web3Client> initRPC(String net) async {
 
 Future<Box> initStorage() async {
   if (!kIsWeb) {
-    Hive.init("data");
+    Hive.init((await getApplicationDocumentsDirectory()).path);
   }
 
   return Hive.openBox("box");
@@ -83,46 +85,57 @@ class BlackVault extends StatefulWidget {
 
 class _BlackVaultState extends State<BlackVault> {
   @override
-  Widget build(BuildContext context) => MultiProvider(
-        providers: [
-          Provider<Box>(
-            create: (_) => widget.box,
-          ),
-          Provider<Web3Client>(
-            create: (_) => widget.rpc,
-          )
-        ],
-        child: GetMaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: "Black Vault",
-          darkTheme: ThemeData.dark().copyWith(
-              tooltipTheme:
-                  TooltipThemeData(triggerMode: TooltipTriggerMode.manual),
-              appBarTheme: const AppBarTheme(
-                  actionsIconTheme: IconThemeData(color: Colors.white60),
-                  centerTitle: true,
-                  iconTheme: IconThemeData(color: Colors.white60),
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  titleTextStyle:
-                      TextStyle(color: Colors.white60, fontSize: 42))),
-          theme: ThemeData(
-              tooltipTheme:
-                  TooltipThemeData(triggerMode: TooltipTriggerMode.manual),
-              appBarTheme: const AppBarTheme(
-                  actionsIconTheme: IconThemeData(color: Colors.black38),
-                  centerTitle: true,
-                  iconTheme: IconThemeData(color: Colors.black38),
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  titleTextStyle:
-                      TextStyle(color: Colors.black38, fontSize: 42))),
-          themeMode: widget.box.get("dark", defaultValue: false)
-              ? ThemeMode.dark
-              : ThemeMode.light,
-          home: HomeScreen(),
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        Provider<Box>(
+          create: (_) => widget.box,
         ),
-      );
+        Provider<Web3Client>(
+          create: (_) => widget.rpc,
+        )
+      ],
+      child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: "Black Vault",
+        darkTheme: ThemeData.dark().copyWith(
+            tooltipTheme:
+                TooltipThemeData(triggerMode: TooltipTriggerMode.manual),
+            appBarTheme: const AppBarTheme(
+                systemOverlayStyle: SystemUiOverlayStyle(
+                    statusBarIconBrightness: Brightness.light),
+                actionsIconTheme: IconThemeData(color: Colors.white60),
+                centerTitle: true,
+                iconTheme: IconThemeData(color: Colors.white60),
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                titleTextStyle:
+                    TextStyle(color: Colors.white60, fontSize: 42))),
+        theme: ThemeData(
+            tooltipTheme:
+                TooltipThemeData(triggerMode: TooltipTriggerMode.manual),
+            appBarTheme: const AppBarTheme(
+                systemOverlayStyle: SystemUiOverlayStyle(
+                    statusBarIconBrightness: Brightness.dark),
+                actionsIconTheme: IconThemeData(color: Colors.black38),
+                centerTitle: true,
+                iconTheme: IconThemeData(color: Colors.black38),
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                titleTextStyle:
+                    TextStyle(color: Colors.black38, fontSize: 42))),
+        themeMode: widget.box.get("dark", defaultValue: false)
+            ? ThemeMode.dark
+            : ThemeMode.light,
+        home: HomeScreen(),
+      ),
+    );
+  }
 }
 
 extension XBuildContext on BuildContext {

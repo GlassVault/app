@@ -1,7 +1,7 @@
+import 'package:black_vault/main.dart';
+import 'package:black_vault/ui/screen/add_wallet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:glassvault/main.dart';
-import 'package:glassvault/ui/screen/add_wallet.dart';
 import 'package:gradient_ui_widgets/buttons/gradient_floating_action_button.dart';
 import 'package:gradient_ui_widgets/gradient_ui_widgets.dart';
 

@@ -1,8 +1,8 @@
+import 'package:black_vault/main.dart';
+import 'package:black_vault/ui/screen/settings.dart';
+import 'package:black_vault/ui/screen/wallets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:glassvault/main.dart';
-import 'package:glassvault/ui/screen/settings.dart';
-import 'package:glassvault/ui/screen/wallets.dart';
 import 'package:gradient_ui_widgets/gradient_ui_widgets.dart';
 
 class VaultDrawer extends StatefulWidget {

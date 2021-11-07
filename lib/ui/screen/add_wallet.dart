@@ -1,7 +1,7 @@
+import 'package:black_vault/main.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:glassvault/main.dart';
 import 'package:gradient_ui_widgets/gradient_ui_widgets.dart';
 
 class AddWallet extends StatefulWidget {
