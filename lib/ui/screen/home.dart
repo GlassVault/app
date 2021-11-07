@@ -1,6 +1,6 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gradient_colors/flutter_gradient_colors.dart';
+import 'package:glassvault/main.dart';
 import 'package:glassvault/ui/screen/documents.dart';
 import 'package:glassvault/ui/screen/passwords.dart';
 import 'package:gradient_ui_widgets/gradient_ui_widgets.dart';
@@ -11,11 +11,6 @@ class HomeScreen extends StatefulWidget {
   List<Build> pages = <Build>[
     (ctx) => DocumentsScreen(),
     (ctx) => PasswordsScreen(),
-  ];
-
-  List<List<Color>> grads = <List<Color>>[
-    GradientColors.blue,
-    GradientColors.orange
   ];
 
   HomeScreen({Key? key}) : super(key: key);
@@ -39,19 +34,25 @@ class _HomeScreenState extends State<HomeScreen> {
         iconSize: 38,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        strokeColor: widget.grads[index][0],
+        strokeColor: Grad.sol[0],
         items: [
           CustomNavigationBarItem(
               icon: Icon(Icons.folder_outlined),
               selectedIcon: GradientIcon(
                 Icons.folder_rounded,
-                gradient: LinearGradient(colors: widget.grads[0]),
+                gradient: RadialGradient(
+                    colors: Grad.sol,
+                    radius: 0.787,
+                    center: Alignment.topCenter),
               )),
           CustomNavigationBarItem(
               icon: Icon(Icons.shield_outlined),
               selectedIcon: GradientIcon(
                 Icons.shield_rounded,
-                gradient: LinearGradient(colors: widget.grads[1]),
+                gradient: RadialGradient(
+                    colors: Grad.sol,
+                    radius: 1.77,
+                    center: Alignment.bottomCenter),
               )),
         ],
       ),

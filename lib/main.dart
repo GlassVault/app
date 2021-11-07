@@ -9,6 +9,14 @@ import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'package:web3dart/web3dart.dart';
 
+class Grad {
+  static const List<Color> sol = [
+    Color(0xffdf3bff),
+    Color(0xff00d0ff),
+    Color(0xff00ffbc)
+  ];
+}
+
 class Properties {
   static String initializedNetwork = "...";
   static const String PROJECT_ID = "a46ace53e3f74ccaa1e4487b1f27f8c5";
@@ -29,10 +37,13 @@ class Properties {
 }
 
 Future<Web3Client> initRPC(String net) async {
-  Properties.initializedNetwork = Properties.NETWORKS.containsKey(net)
-      ? Properties.NETWORKS[net]!
-      : Properties.NETWORKS[Properties.DEFAULT_NETWORK]!;
-  return Web3Client(Properties.initializedNetwork, Client());
+  Properties.initializedNetwork =
+      Properties.NETWORKS.containsKey(net) ? net : Properties.DEFAULT_NETWORK;
+  return Web3Client(
+      Properties.NETWORKS.containsKey(net)
+          ? Properties.NETWORKS[net]!
+          : Properties.NETWORKS[Properties.DEFAULT_NETWORK]!,
+      Client());
 }
 
 Future<Box> initStorage() async {

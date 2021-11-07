@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:glassvault/main.dart';
 import 'package:glassvault/ui/screen/drawer.dart';
+import 'package:gradient_ui_widgets/gradient_ui_widgets.dart';
 
 class DocumentsScreen extends StatefulWidget {
   const DocumentsScreen({Key? key}) : super(key: key);
@@ -15,7 +17,11 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
       drawer: VaultDrawer(),
       primary: true,
       appBar: AppBar(
-        title: Text("Documents"),
+        title: GradientText(
+          "Documents",
+          gradient: RadialGradient(
+              colors: Grad.sol, center: Alignment(2.5, 0), radius: 12),
+        ),
       ),
       body: Center(child: Text("Documents go here")),
     );

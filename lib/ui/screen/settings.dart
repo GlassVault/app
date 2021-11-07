@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:glassvault/main.dart';
+import 'package:gradient_ui_widgets/gradient_ui_widgets.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -29,11 +30,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       primary: true,
       appBar: AppBar(
-        title: Text("Settings"),
+        title: GradientText(
+          "Settings",
+          gradient: RadialGradient(
+              colors: Grad.sol, center: Alignment.topLeft, radius: 8),
+        ),
       ),
       body: ListView(
         children: [
           CheckboxListTile(
+              secondary: GradientIcon(
+                Icons.palette_rounded,
+                gradient: RadialGradient(
+                    colors: Grad.sol,
+                    radius: 1.787,
+                    center: Alignment.topRight),
+              ),
               title: Text("Dark Theme"),
               value: dark,
               onChanged: (f) => setState(() {
@@ -43,13 +55,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   })),
           ExpansionTile(
             title: Text("Network"),
-            leading: Icon(Icons.signal_cellular_alt_rounded),
+            leading: GradientIcon(
+              Icons.signal_cellular_alt_rounded,
+              gradient: RadialGradient(
+                  colors: Grad.sol,
+                  radius: 1.187,
+                  center: Alignment.bottomLeft),
+            ),
             subtitle: Text(Properties.initializedNetwork == network
                 ? network
-                : Properties.initializedNetwork +
-                    " -> " +
-                    network +
-                    " (App Restart Required)"),
+                : network + " (App Restart Required)"),
             children: [
               ListView.builder(
                 shrinkWrap: true,

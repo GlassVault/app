@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:glassvault/main.dart';
 import 'package:glassvault/ui/screen/drawer.dart';
+import 'package:gradient_ui_widgets/gradient_ui_widgets.dart';
 
 class PasswordsScreen extends StatefulWidget {
   const PasswordsScreen({Key? key}) : super(key: key);
@@ -15,7 +17,11 @@ class _PasswordsScreenState extends State<PasswordsScreen> {
       drawer: VaultDrawer(),
       primary: true,
       appBar: AppBar(
-        title: Text("Passwords"),
+        title: GradientText(
+          "Passwords",
+          gradient: RadialGradient(
+              colors: Grad.sol, center: Alignment.centerRight, radius: 6),
+        ),
       ),
       body: Center(child: Text("Passwords go here")),
     );

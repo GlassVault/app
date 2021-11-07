@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gradient_colors/flutter_gradient_colors.dart';
+import 'package:glassvault/main.dart';
 import 'package:gradient_ui_widgets/buttons/gradient_floating_action_button.dart';
 import 'package:gradient_ui_widgets/gradient_ui_widgets.dart';
 
@@ -18,10 +18,15 @@ class _WalletsScreenState extends State<WalletsScreen> {
           onPressed: () {},
           label: Text("Add Wallet"),
           icon: Icon(Icons.add_rounded),
-          gradient: LinearGradient(colors: GradientColors.blue)),
+          gradient: RadialGradient(
+              colors: Grad.sol, center: Alignment.topLeft, radius: 11)),
       primary: true,
       appBar: AppBar(
-        title: Text("Wallets"),
+        title: GradientText(
+          "Wallets",
+          gradient: RadialGradient(
+              colors: Grad.sol, center: Alignment.bottomRight, radius: 11),
+        ),
       ),
       body: Center(child: Text("Wallets go here")),
     );
