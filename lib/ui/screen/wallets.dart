@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:glassvault/main.dart';
+import 'package:glassvault/ui/screen/add_wallet.dart';
 import 'package:gradient_ui_widgets/buttons/gradient_floating_action_button.dart';
 import 'package:gradient_ui_widgets/gradient_ui_widgets.dart';
 
@@ -15,7 +17,8 @@ class _WalletsScreenState extends State<WalletsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: GradientFloatingActionButton.extended(
-          onPressed: () {},
+          onPressed: () =>
+              Get.to(() => AddWallet(), transition: Transition.downToUp),
           label: Text("Add Wallet"),
           icon: Icon(Icons.add_rounded),
           gradient: RadialGradient(

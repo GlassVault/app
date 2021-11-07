@@ -15,6 +15,8 @@ class Grad {
     Color(0xff00d0ff),
     Color(0xff00ffbc)
   ];
+  static List<Color> solFaint =
+      sol.map((e) => e.withOpacity(0.25)).toList(growable: false);
 }
 
 class Properties {

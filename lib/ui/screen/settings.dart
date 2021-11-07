@@ -67,6 +67,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 : network + " (App Restart Required)"),
             children: [
               ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, pos) => RadioListTile<String>(
                     value: networks[pos],
