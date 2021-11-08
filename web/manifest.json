@@ -1,35 +1,16 @@
 {
-    "name": "app",
-    "short_name": "app",
-    "start_url": ".",
-    "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "Interact with glassvault",
-    "orientation": "portrait-primary",
-    "prefer_related_applications": false,
-    "icons": [
-        {
-            "src": "icons/Icon-192.png",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "icons/Icon-512.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        },
-        {
-            "src": "icons/Icon-maskable-192.png",
-            "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "maskable"
-        },
-        {
-            "src": "icons/Icon-maskable-512.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "maskable"
-        }
-    ]
+    "version": "1.0",
+    "manifest_version": 2,
+    "name": "Black Vault",
+    "short_name": "Vault",
+    "content_security_policy": "script-src https://unpkg.com/canvaskit-wasm@0.28.1/bin/canvaskit.js 'self' 'unsafe-eval'; object-src 'self' 'unsafe-eval'",
+    "browser_action": {
+        "default_popup": "x.html",
+        "default_icon": "icons/Icon-512.png"
+    },
+    "description": "Interact with Black Vault",
+    "icons": {
+        "192": "icons/Icon-192.png",
+        "512": "icons/Icon-512.png"
+    }
 }

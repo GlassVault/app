@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:black_vault/main.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:web3dart/credentials.dart';
 
@@ -31,12 +30,11 @@ class WalletLoader {
   static void saveWallet(Wallet w) =>
       Get.context!.box().put("wallet-" + w.privateKey.address.hex, w.toJson());
 
-  static Future<Wallet> createWallet(String name, String password) async =>
-      compute<List<String>, Wallet>((s) {
-        Wallet w = Wallet.createNew(EthPrivateKey.createRandom(Random.secure()),
-            password, Random.secure());
-        WalletLoader.saveWalletName(w.privateKey.address.hex, name);
-        WalletLoader.saveWallet(w);
-        return w;
-      }, <String>[name, password]);
+  static Future<Wallet> createWallet(String name, String password) async {
+    Wallet w = Wallet.createNew(
+        EthPrivateKey.createRandom(Random.secure()), password, Random.secure());
+    WalletLoader.saveWalletName(w.privateKey.address.hex, name);
+    WalletLoader.saveWallet(w);
+    return w;
+  }
 }
