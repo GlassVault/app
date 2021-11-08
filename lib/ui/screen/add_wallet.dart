@@ -1,7 +1,9 @@
 import 'package:black_vault/main.dart';
+import 'package:black_vault/util/wallet_loader.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:gradient_ui_widgets/gradient_ui_widgets.dart';
 
 class AddWallet extends StatefulWidget {
@@ -15,10 +17,14 @@ class _AddWalletState extends State<AddWallet> {
   late PageController controller;
   int choice = 0;
   late TextEditingController tc;
+  late TextEditingController tc2;
+  late TextEditingController tc3;
 
   @override
   void initState() {
     tc = TextEditingController();
+    tc2 = TextEditingController();
+    tc3 = TextEditingController();
     controller = PageController(initialPage: 0);
     super.initState();
   }
@@ -252,7 +258,108 @@ class _AddWalletState extends State<AddWallet> {
                                             ],
                                           )
                                         : choice == 3
-                                            ? Container()
+                                            ? Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  TextField(
+                                                    controller: tc,
+                                                    decoration: InputDecoration(
+                                                        hintText: "Nickname"),
+                                                  ),
+                                                  TextField(
+                                                    controller: tc2,
+                                                    obscureText: true,
+                                                    decoration: InputDecoration(
+                                                        hintText:
+                                                            "Wallet Password"),
+                                                  ),
+                                                  TextField(
+                                                    controller: tc3,
+                                                    obscureText: true,
+                                                    decoration: InputDecoration(
+                                                        hintText:
+                                                            "Confirm Password"),
+                                                  ),
+                                                  GradientElevatedButton.icon(
+                                                      onPressed: () {
+                                                        if (tc2.value.text ==
+                                                            tc3.value.text) {
+                                                          ScaffoldMessenger.of(
+                                                                  context)
+                                                              .showSnackBar(
+                                                                  SnackBar(
+                                                            duration: Duration(
+                                                                hours: 24),
+                                                            content: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .min,
+                                                              children: [
+                                                                GradientCircularProgressIndicator(
+                                                                    valueGradient: RadialGradient(
+                                                                        colors: Grad
+                                                                            .sol,
+                                                                        radius:
+                                                                            0.7,
+                                                                        center:
+                                                                            Alignment.topRight)),
+                                                                GradientText(
+                                                                  " Creating Wallet '" +
+                                                                      tc.value
+                                                                          .text +
+                                                                      "'...",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          24),
+                                                                  gradient: RadialGradient(
+                                                                      colors: Grad
+                                                                          .sol,
+                                                                      radius:
+                                                                          2.7,
+                                                                      center: Alignment
+                                                                          .bottomLeft),
+                                                                )
+                                                              ],
+                                                            ),
+                                                          ));
+                                                          Future.delayed(
+                                                              Duration(
+                                                                  milliseconds:
+                                                                      750),
+                                                              () => WalletLoader.createWallet(
+                                                                      tc.value
+                                                                          .text,
+                                                                      tc2.value
+                                                                          .text)
+                                                                  .then((value) =>
+                                                                      setState(
+                                                                          () {
+                                                                        ScaffoldMessenger.of(context)
+                                                                            .hideCurrentSnackBar();
+                                                                      }))).then(
+                                                              (value) =>
+                                                                  Navigator.pop(
+                                                                      context));
+                                                        } else {
+                                                          ScaffoldMessenger.of(
+                                                                  context)
+                                                              .showSnackBar(
+                                                                  SnackBar(
+                                                            content: Text(
+                                                                "Passwords do not match!"),
+                                                          ));
+                                                        }
+                                                      },
+                                                      gradient: RadialGradient(
+                                                          colors: Grad.sol,
+                                                          center: Alignment
+                                                              .bottomLeft,
+                                                          radius: 11),
+                                                      icon: Icon(Icons.check),
+                                                      label:
+                                                          Text("Create Wallet"))
+                                                ],
+                                              )
                                             : Container()
                           ],
                         ),

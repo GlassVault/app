@@ -11,12 +11,20 @@ class DocumentsScreen extends StatefulWidget {
 }
 
 class _DocumentsScreenState extends State<DocumentsScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: VaultDrawer(),
       primary: true,
+      key: _scaffoldKey,
       appBar: AppBar(
+        leading: GradientIconButton(
+          icon: Icon(Icons.menu),
+          gradient: RadialGradient(
+              colors: Grad.sol, radius: 1.2, center: Alignment.topLeft),
+          onPressed: () => _scaffoldKey.currentState!.openDrawer(),
+        ),
         title: GradientText(
           "Documents",
           gradient: RadialGradient(

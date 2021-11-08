@@ -1,6 +1,7 @@
 import 'package:black_vault/main.dart';
 import 'package:black_vault/ui/screen/documents.dart';
 import 'package:black_vault/ui/screen/passwords.dart';
+import 'package:black_vault/ui/screen/wallets.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_ui_widgets/gradient_ui_widgets.dart';
@@ -11,6 +12,7 @@ class HomeScreen extends StatefulWidget {
   List<Build> pages = <Build>[
     (ctx) => DocumentsScreen(),
     (ctx) => PasswordsScreen(),
+    (ctx) => WalletsScreen(),
   ];
 
   HomeScreen({Key? key}) : super(key: key);
@@ -37,7 +39,11 @@ class _HomeScreenState extends State<HomeScreen> {
         strokeColor: Grad.sol[0],
         items: [
           CustomNavigationBarItem(
-              icon: Icon(Icons.folder_outlined),
+              icon: GradientIcon(Icons.folder_outlined,
+                  gradient: RadialGradient(
+                      colors: Grad.solFaint,
+                      radius: 1.77,
+                      center: Alignment.bottomCenter)),
               selectedIcon: GradientIcon(
                 Icons.folder_rounded,
                 gradient: RadialGradient(
@@ -46,13 +52,28 @@ class _HomeScreenState extends State<HomeScreen> {
                     center: Alignment.topCenter),
               )),
           CustomNavigationBarItem(
-              icon: Icon(Icons.shield_outlined),
+              icon: GradientIcon(Icons.shield_outlined,
+                  gradient: RadialGradient(
+                      colors: Grad.solFaint,
+                      radius: 1.77,
+                      center: Alignment.bottomCenter)),
               selectedIcon: GradientIcon(
                 Icons.shield_rounded,
                 gradient: RadialGradient(
                     colors: Grad.sol,
                     radius: 1.77,
                     center: Alignment.bottomCenter),
+              )),
+          CustomNavigationBarItem(
+              icon: GradientIcon(Icons.account_balance_wallet_outlined,
+                  gradient: RadialGradient(
+                      colors: Grad.solFaint,
+                      radius: 1.77,
+                      center: Alignment.bottomCenter)),
+              selectedIcon: GradientIcon(
+                Icons.account_balance_wallet_rounded,
+                gradient: RadialGradient(
+                    colors: Grad.sol, radius: 1.37, center: Alignment.topLeft),
               )),
         ],
       ),
