@@ -25,18 +25,16 @@ class _VaultDrawerState extends State<VaultDrawer> {
                 radius: 3)),
         child: Stack(
           children: [
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                  colors: <Color>[
-                    Theme.of(context).scaffoldBackgroundColor,
-                    Colors.transparent
-                  ],
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
-                )),
-              ),
+            Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                colors: <Color>[
+                  Theme.of(context).scaffoldBackgroundColor,
+                  Colors.transparent
+                ],
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
+              )),
             ),
             SafeArea(
               child: Column(
