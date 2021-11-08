@@ -26,12 +26,26 @@ class _WalletsScreenState extends State<WalletsScreen> {
   Widget build(BuildContext context) {
     List<String> wallets = WalletLoader.listWallets();
 
+    Future.delayed(Duration(milliseconds: 2000), () {
+      List<String> wt = WalletLoader.listWallets();
+
+      print("WTS = " +
+          wt.length.toString() +
+          " ORIGIN IS " +
+          wallets.length.toString());
+
+      if (wt.length != wallets.length) {
+        setState(() {});
+      }
+    });
+
     return Scaffold(
       key: _scaffoldKey,
       drawer: VaultDrawer(),
       floatingActionButton: GradientFloatingActionButton.extended(
           onPressed: () =>
-              Get.to(() => AddWallet(), transition: Transition.downToUp),
+              Get.to(() => AddWallet(), transition: Transition.downToUp)
+                  ?.then((value) => setState(() {})),
           label: Text("Add Wallet"),
           icon: Icon(Icons.add_rounded),
           gradient: RadialGradient(
@@ -138,7 +152,8 @@ class _WalletsScreenState extends State<WalletsScreen> {
                     )),
                   ),
                   onTap: () => Get.to(() => WalletView(walletKey: wallets[pos]),
-                      transition: Transition.downToUp),
+                          transition: Transition.downToUp)
+                      ?.then((value) => setState(() {})),
                 ),
               ),
               itemCount: wallets.length,

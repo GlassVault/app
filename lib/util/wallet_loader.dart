@@ -7,7 +7,11 @@ import 'package:web3dart/credentials.dart';
 class WalletLoader {
   static Map<String, Wallet> unlocked = <String, Wallet>{};
 
-  static void removeWallet(String key) => Get.context!.box().delete(key);
+  static void removeWallet(String key) {
+    Get.context!.box().delete(key);
+    Get.context!.box().delete("wallet-" + key);
+    Get.context!.box().delete("wallet.name-" + key);
+  }
 
   static List<String> listWallets() => Get.context!
       .box()
@@ -19,7 +23,7 @@ class WalletLoader {
 
   static Wallet loadWallet(String address, String password) {
     Wallet w =
-        Wallet.fromJson("wallet-" + Get.context!.box().get(address), password);
+        Wallet.fromJson(Get.context!.box().get("wallet-" + address), password);
     unlocked[w.privateKey.address.hex] = w;
     return w;
   }
