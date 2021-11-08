@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:black_vault/main.dart';
 import 'package:black_vault/util/wallet_loader.dart';
@@ -24,12 +25,14 @@ class _AddWalletState extends State<AddWallet> {
   late TextEditingController tc;
   late TextEditingController tc2;
   late TextEditingController tc3;
+  late TextEditingController tc4;
 
   @override
   void initState() {
     tc = TextEditingController();
     tc2 = TextEditingController();
     tc3 = TextEditingController();
+    tc4 = TextEditingController();
     controller = PageController(initialPage: 0);
     super.initState();
   }
@@ -265,8 +268,25 @@ class _AddWalletState extends State<AddWallet> {
                                               TextField(
                                                 controller: tc,
                                                 decoration: InputDecoration(
+                                                    hintText: "Enter Nickname"),
+                                              ),
+                                              TextField(
+                                                controller: tc2,
+                                                decoration: InputDecoration(
                                                     hintText:
                                                         "Enter Private Key"),
+                                              ),
+                                              TextField(
+                                                controller: tc3,
+                                                decoration: InputDecoration(
+                                                    hintText:
+                                                        "New Wallet Password"),
+                                              ),
+                                              TextField(
+                                                controller: tc4,
+                                                decoration: InputDecoration(
+                                                    hintText:
+                                                        "Confirm Password"),
                                               ),
                                               Align(
                                                 alignment:
@@ -276,7 +296,44 @@ class _AddWalletState extends State<AddWallet> {
                                                       EdgeInsets.only(top: 7),
                                                   child: GradientElevatedButton
                                                       .icon(
-                                                          onPressed: () {},
+                                                          onPressed: () {
+                                                            if (tc3.value
+                                                                    .text ==
+                                                                tc4.value
+                                                                    .text) {
+                                                              Wallet w = Wallet.createNew(
+                                                                  EthPrivateKey
+                                                                      .fromHex(tc2
+                                                                          .value
+                                                                          .text),
+                                                                  tc3.value
+                                                                      .text,
+                                                                  Random
+                                                                      .secure());
+                                                              WalletLoader
+                                                                  .saveWallet(
+                                                                      w);
+                                                              WalletLoader
+                                                                  .saveWalletName(
+                                                                      w
+                                                                          .privateKey
+                                                                          .address
+                                                                          .hex,
+                                                                      tc.value
+                                                                          .text);
+                                                              Navigator.pop(
+                                                                  context);
+                                                            } else {
+                                                              ScaffoldMessenger
+                                                                      .of(
+                                                                          context)
+                                                                  .showSnackBar(
+                                                                      SnackBar(
+                                                                content: Text(
+                                                                    "Passwords do not match!"),
+                                                              ));
+                                                            }
+                                                          },
                                                           gradient: RadialGradient(
                                                               colors: Grad.sol,
                                                               center: Alignment

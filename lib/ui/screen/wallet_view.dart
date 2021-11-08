@@ -433,7 +433,7 @@ class _WalletViewState extends State<WalletView> {
                               .then((value) => ScaffoldMessenger.of(context)
                                       .showSnackBar(const SnackBar(
                                     content: Text(
-                                        "Wallet JSON Copied to Clipboard!"),
+                                        "Private Key Copied to Clipboard!"),
                                   )));
                         },
                         title: GradientText(

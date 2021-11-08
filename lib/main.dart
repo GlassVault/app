@@ -59,6 +59,7 @@ Future<Box> initStorage() async {
 }
 
 void main() {
+  Paint.enableDithering = true;
   WidgetsFlutterBinding.ensureInitialized();
   initStorage().then((box) =>
       initRPC(box.get("network", defaultValue: Properties.DEFAULT_NETWORK))
