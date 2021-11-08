@@ -17,8 +17,12 @@ class WalletLoader {
       .map((e) => e.replaceFirst("wallet-", ""))
       .toList(growable: false);
 
-  static Wallet loadWallet(String address, String password) =>
-      Wallet.fromJson("wallet-" + Get.context!.box().get(address), password);
+  static Wallet loadWallet(String address, String password) {
+    Wallet w =
+        Wallet.fromJson("wallet-" + Get.context!.box().get(address), password);
+    unlocked[w.privateKey.address.hex] = w;
+    return w;
+  }
 
   static void saveWalletName(String key, String name) =>
       Get.context!.box().put("wallet.name-" + key, name);
@@ -27,8 +31,10 @@ class WalletLoader {
       .box()
       .get("wallet.name-" + key, defaultValue: "Wallet " + key.substring(0, 4));
 
-  static void saveWallet(Wallet w) =>
-      Get.context!.box().put("wallet-" + w.privateKey.address.hex, w.toJson());
+  static void saveWallet(Wallet w) {
+    Get.context!.box().put("wallet-" + w.privateKey.address.hex, w.toJson());
+    unlocked[w.privateKey.address.hex] = w;
+  }
 
   static Future<Wallet> createWallet(String name, String password) async {
     Wallet w = Wallet.createNew(

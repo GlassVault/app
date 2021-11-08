@@ -21,6 +21,8 @@ dependencies:
   path_provider: ^2.0.6
   encrypt: ^5.0.1
   simple_gradient_text: ^1.2.2
+  file_picker: ^4.2.1
+  draggable_home: ^1.0.2
   flutter_gradient_colors: ^2.1.1
   provider: ^6.0.1
   gradient_ui_widgets: ^1.0.2-nullsafety

@@ -1,10 +1,15 @@
+import 'dart:convert';
+
 import 'package:black_vault/main.dart';
 import 'package:black_vault/util/wallet_loader.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:gradient_ui_widgets/gradient_ui_widgets.dart';
+import 'package:web3dart/credentials.dart';
 
 class AddWallet extends StatefulWidget {
   const AddWallet({Key? key}) : super(key: key);
@@ -186,14 +191,42 @@ class _AddWalletState extends State<AddWallet> {
                               ),
                             ),
                             choice == 0
-                                ? GradientElevatedButton.icon(
-                                    onPressed: () {},
-                                    gradient: RadialGradient(
-                                        colors: Grad.sol,
-                                        center: Alignment.bottomLeft,
-                                        radius: 11),
-                                    icon: Icon(Icons.upload_rounded),
-                                    label: Text("Choose File"))
+                                ? Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                        TextField(
+                                          controller: tc,
+                                          decoration: InputDecoration(
+                                              hintText: "Nickname"),
+                                        ),
+                                        TextField(
+                                          controller: tc2,
+                                          obscureText: true,
+                                          decoration: InputDecoration(
+                                              hintText: "Wallet Password"),
+                                        ),
+                                        GradientElevatedButton.icon(
+                                            onPressed: () {
+                                              FilePicker.platform
+                                                  .pickFiles()
+                                                  .then((r) {
+                                                Wallet w = Wallet.fromJson(
+                                                    utf8.decode(
+                                                        r!.files.single.bytes!),
+                                                    tc2.value.text);
+                                                WalletLoader.saveWallet(w);
+                                                WalletLoader.saveWalletName(
+                                                    w.privateKey.address.hex,
+                                                    tc.value.text);
+                                              });
+                                            },
+                                            gradient: RadialGradient(
+                                                colors: Grad.sol,
+                                                center: Alignment.bottomLeft,
+                                                radius: 11),
+                                            icon: Icon(Icons.upload_rounded),
+                                            label: Text("Choose File"))
+                                      ])
                                 : choice == 1
                                     ? Column(
                                         mainAxisSize: MainAxisSize.min,

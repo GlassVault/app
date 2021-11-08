@@ -1,6 +1,7 @@
 import 'package:black_vault/main.dart';
 import 'package:black_vault/ui/screen/add_wallet.dart';
 import 'package:black_vault/ui/screen/drawer.dart';
+import 'package:black_vault/ui/screen/wallet_view.dart';
 import 'package:black_vault/util/wallet_loader.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -136,7 +137,8 @@ class _WalletsScreenState extends State<WalletsScreen> {
                       ],
                     )),
                   ),
-                  onTap: () {},
+                  onTap: () => Get.to(() => WalletView(walletKey: wallets[pos]),
+                      transition: Transition.downToUp),
                 ),
               ),
               itemCount: wallets.length,
