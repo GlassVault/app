@@ -2,6 +2,7 @@ import 'package:black_vault/main.dart';
 import 'package:black_vault/ui/screen/add_wallet.dart';
 import 'package:black_vault/ui/screen/drawer.dart';
 import 'package:black_vault/ui/screen/wallet_view.dart';
+import 'package:black_vault/util/value.dart';
 import 'package:black_vault/util/wallet_loader.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -132,8 +133,10 @@ class _WalletsScreenState extends State<WalletsScreen> {
                               );
                             }
 
+                            print("Value is " + snap.data!.getInWei.toString());
+
                             return GradientText(
-                              snap.data!.getInEther.toString() + " ETH",
+                              SmartValue.getSmartValue(snap.data!),
                               style: TextStyle(fontSize: 24),
                               gradient: RadialGradient(
                                   colors: Grad.sol,

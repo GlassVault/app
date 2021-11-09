@@ -1,4 +1,5 @@
 import 'package:black_vault/main.dart';
+import 'package:black_vault/util/value.dart';
 import 'package:black_vault/util/wallet_loader.dart';
 import 'package:draggable_home/draggable_home.dart';
 import 'package:flutter/material.dart';
@@ -236,7 +237,7 @@ class _WalletViewState extends State<WalletView> {
                           }
 
                           return GradientText(
-                            snap.data!.getInEther.toString() + " ETH",
+                            SmartValue.getSmartValue(snap.data!),
                             style: TextStyle(fontSize: 24),
                             gradient: RadialGradient(
                                 colors: Grad.sol,
